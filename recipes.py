@@ -17,6 +17,12 @@ def train_model_on_data(data_path: str):
 # train_model_on_data(os.path.join("data", "breakfast.txt"))
 # train_model_on_data(os.path.join("data", "dinner.txt"))
 
-textgen = textgenrnn(os.path.join("models", "dinner.hdf5"))
-recipes = textgen.generate(20, temperature=0.5, return_as_list=True)
-[print(recipe) for recipe in recipes]
+def setup_models() -> textgenrnn:
+    breakfast_model = textgenrnn(os.path.join("models", "breakfast.hdf5"))
+    dinner_model = textgenrnn(os.path.join("models", "dinner.hdf5"))
+    dessert_model = textgenrnn(os.path.join("models", "dessert.hdf5"))
+    return breakfast_model, dinner_model, dessert_model
+
+def get_recipe(model: textgenrnn) -> str:
+    recipes = model.generate(1, temperature=0.4, return_as_list=True)
+    return recipes[0]
