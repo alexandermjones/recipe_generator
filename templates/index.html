@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <link rel="stylesheet" href="static/css/bulma.css">
+  <link rel="stylesheet" href="static/css/mystyle.css">
+  <link rel="stylesheet" href="static/css/background.css">
+  <title>YUM Recipe Generator</title>
+  <link rel="shortcut icon" type="image/ico" href="static/favicon.ico"/>
+  <script src="static/js/jquery.js"></script>
+</head>
+
+<body>
+
+  <div class="container is-max-desktop">
+
+    <div class="container columns">
+      <div class="column is-1">
+        <a href="/">
+          <p style="font-size:40px">😋</p>
+        </a>
+      </div>
+      <div class="column is-1 is-offset-9">
+        <a href="https://github.com/alexandermjones/recipe_generator">
+          <p class="has-text-grey-dark" style="font-size:18px">About</p>
+        </a>
+      </div>
+      <div class="column is-1">
+        <a href="https://github.com/alexandermjones/recipe_generator">
+          <p class="has-text-grey-dark" style="font-size:18px">Code</p>
+        </a>
+      </div>
+    </div>
+
+    <h1 class="subtitle is-1">YUM Recipe Generator</h1>
+    <hr>
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter"
+        <p class="subtitle" style="text-align: center;">YUM = Your Unique Meal-generator.
+        <br>
+        An AI-powered meal generator that suggests new recipes based on existing meals available from 
+        <a href="https://www.bbcgoodfood.com/">BBC Good Food</a>. 
+        <br>No guarantee of taste, edibility or palatibility is given.
+        <br>Hit one of the buttons to find out what to eat next!</p>
+      </div>
+    </div>
+
+    <div id="buttons-div" class="columns">
+      <div class="column" style="display: inline-flex">
+        <button class="button is-success is-outlined is-large column" onclick="request_recipe('breakfast', 'success')">Breakfast</button>
+      </div>
+      <div class="column" style="display: inline-flex">
+        <button class="button is-link is-outlined is-large column" onclick="request_recipe('dinner', 'link')">Main meal</button>
+      </div>
+      <div class="column" style="display: inline-flex">
+        <button class="button is-danger is-outlined is-large column" onclick="request_recipe('desserts', 'danger')">Dessert</button>
+      </div>
+    </div>
+
+    <div id="meal"></div>
+  
+  </div>
+
+
+<script>
+
+var running = false;
+
+function request_recipe(meal, colour) {
+  // Check we aren't already looking for a query, and put the loading bar if we do
+  if (!running) {
+    running = true;
+    var loading_bar = '<progress class="progress is-small is-'+colour+'" max="100">15%</progress>';
+    $("#meal").html(loading_bar);
+  }
+  // Query the recipe
+  $.get('/'+meal, function(data, status){
+    var recipe = '<p class="subtitle has-text-dark is-2" style="text-align: center;">' + data + '</p>'
+    $("#meal").html(recipe);
+  });
+  // Sleep so we don't DDOS ourselves
+  sleep(500);
+  var running = false;
+}
+
+</script>
+
+</body>
+</html>
