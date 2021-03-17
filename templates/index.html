@@ -15,28 +15,58 @@
 
   <div class="container is-max-desktop">
 
-    <div class="container columns">
-      <div class="column is-1">
+    <nav class="navbar is-dark" style="background-color: transparent; background-image: none;" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
         <a href="/">
           <p style="font-size:40px">😋</p>
         </a>
-      </div>
-      <div class="column is-1 is-offset-9">
-        <a href="https://github.com/alexandermjones/recipe_generator">
-          <p class="has-text-grey-dark" style="font-size:18px">About</p>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         </a>
       </div>
-      <div class="column is-1">
-        <a href="https://github.com/alexandermjones/recipe_generator">
-          <p class="has-text-grey-dark" style="font-size:18px">Code</p>
-        </a>
+      <div class="navbar-menu" id="navbarMenu" style="background-color: transparent; background-image: none;">  
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <a onclick="document.getElementById('about-modal').style.display='block'">
+              <p class="has-text-grey-dark" style="font-size:18px">About</p>
+            </a>
+            <div class="modal has-text-grey-dark" id="about-modal" style="padding-top: 5%; background-color: initial;">
+              <div class="modal-background" onclick="document.getElementById('about-modal').style.display='none'"></div>
+              <div class="modal-card">
+                <header class="modal-card-head">
+                  <p class="modal-card-title">About</p>
+                  <button class="delete" aria-label="close" onclick="document.getElementById('about-modal').style.display='none'"></button>
+                </header>
+                <section class="modal-card-body">
+                  <p style="font-size: 20px;">YUM is a recurrent neural network that generates novel recipe titles. 
+                    It has been trained on BBC Good Food recipe titles in order to suggest new food combinations.
+                    Often these are new for a reason!
+                  Constructive feedback welcome.</p>
+                </section>
+                <footer class="modal-card-foot">
+                  <p style="font-size: 16px;">This page was created by Alexander M. Jones utilising a variety of open-source technology. View the
+                    <span class="has-text-link">
+                      <a has-text-link href="https://github.com/alexandermjones/recipe_generator">source code</a>
+                    </span> for more details.</p>
+                </footer>
+              </div>
+            </div>
+          </div>
+          <div class="navbar-item">
+            <a href="https://github.com/alexandermjones/recipe_generator">
+              <p class="has-text-grey-dark" style="font-size:18px">Code</p>
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
 
     <h1 class="subtitle is-1">YUM Recipe Generator</h1>
     <hr>
     <div class="columns">
-      <div class="column is-half is-offset-one-quarter"
+      <div class="column is-three-fifths is-offset-one-fifth">
         <p class="subtitle" style="text-align: center;">YUM = Your Unique Meal-generator.
         <br>
         An AI-powered meal generator that suggests new recipes based on existing meals available from 
@@ -83,6 +113,18 @@ function request_recipe(meal, colour) {
   sleep(500);
   var running = false;
 }
+
+$(document).ready(function() {
+
+// Check for click events on the navbar burger icon
+$(".navbar-burger").click(function() {
+
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+
+});
+});
 
 </script>
 
