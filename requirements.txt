@@ -40,7 +40,7 @@ tensorflow-estimator==2.4.0
 tensorflow-hub==0.9.0
 tensorflowjs==3.3.0
 termcolor==1.1.0
-textgenrnn==2.0.0
+textgenrnn @ git+git://github.com/minimaxir/textgenrnn.git@ee8b9e806d109c25566581f358a4a72b6f03929a
 threadpoolctl==2.1.0
 tqdm==4.59.0
 typing-extensions==3.7.4.3
