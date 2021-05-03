@@ -1,0 +1,2 @@
+Flask==1.1.2
+textgenrnn @ git+git://github.com/minimaxir/textgenrnn.git@ee8b9e806d109c25566581f358a4a72b6f03929a
