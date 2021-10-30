@@ -10,23 +10,28 @@ The idea of an AI choosing your food is a _recipe_ for excitement, not (just) ho
 
 Why not give YUM (Your Unique Meal-planner) a try!
 
+![Example Gif](Animation.gif)
+
 **Disclosure** There is _no_ guarantee that any meal suggested will be
 edible, let alone tasty!
 
 ## Installation
 
-This project requires textgenrnn as the only dependency. This can be installed from PyPI, 
-but as of writing this (06/03/21) the PyPI version is not up to date and it is recommended
-to install from git instead. The command for this is:
 ```
-pip3 install git+git://github.com/minimaxir/textgenrnn.git
+pip3 install -r requirements.txt
 ```
+
+Note that this project requires textgenrnn. This can be installed from PyPI, 
+but as of writing this, the PyPI version is not up to date and it is recommended
+to install from git instead as in the requirements file.
 
 ## Usage
 
-TBD.
+Launch the Flask application and browse to `http://127.0.0.1:5000`.
+Click on a meal type to discover your next meal!
+To launch the application, simply enter:
 ```
-python3 recipes.py
+python3 application.py
 ```
 
 ## Datasets
@@ -43,6 +48,9 @@ There are four pre-trained models in this repository: `allrecipes.hdf5`,
 These models have been trained on the relevant datasets in the data folder.
 If you wish to train new models, call the function `train_model_on_data` in `recipes.py`
 on the relevant dataset.
+
+It is recommended to train models on `similar' recipes (as those split by meals are)
+as otherwise very unpalatable combinations can occur.
 
 ## Contributing
 Contributions are welcome, but please get in touch with me first
