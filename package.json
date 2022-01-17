@@ -1,0 +1,23 @@
+{
+  "name": "yum_recipe_generator",
+  "version": "1.0.0",
+  "description": "A neural network for generating new recipe titles.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandermjones/recipe_generator.git"
+  },
+  "author": "Alexander M Jones",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexandermjones/recipe_generator/issues"
+  },
+  "homepage": "https://github.com/alexandermjones/recipe_generator#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}

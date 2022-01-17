@@ -3,12 +3,13 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="static/css/bulma.css">
-  <link rel="stylesheet" href="static/css/mystyle.css">
-  <link rel="stylesheet" href="static/css/background.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css">
+  <link rel="stylesheet" href="css/mystyle.css">
+  <link rel="stylesheet" href="css/background.css">
   <title>YUM Recipe Generator</title>
-  <link rel="shortcut icon" type="image/ico" href="static/favicon.ico"/>
-  <script src="static/js/jquery.js"></script>
+  <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js">import * as tf from '@tensorflow/tfjs';</script>
 </head>
 
 <body>
@@ -97,33 +98,43 @@
 
 var running = false;
 
+
+async function load_models() {
+  const breakfast_model = await tf.loadLayersModel('/models/breakfast_model/model.json');
+  // const dinner_model = await tf.loadLayersModel('/models/dinner_model/model.json');
+  // const dessert_model = await tf.loadLayersModel('/models/dessert_model/model.json');
+};
+
+
 function request_recipe(meal, colour) {
   // Check we aren't already looking for a query, and put the loading bar if we do
   if (!running) {
     running = true;
     var loading_bar = '<progress class="progress is-small is-'+colour+'" max="100">15%</progress>';
     $("#meal").html(loading_bar);
+
+    // Query the recipe
+    $.get('/'+meal, function(data, status){
+      var recipe = '<p class="subtitle has-text-dark is-2" style="text-align: center;">' + data + '</p>'
+      $("#meal").html(recipe);
+    });
   }
-  // Query the recipe
-  $.get('/'+meal, function(data, status){
-    var recipe = '<p class="subtitle has-text-dark is-2" style="text-align: center;">' + data + '</p>'
-    $("#meal").html(recipe);
-  });
   // Sleep so we don't DDOS ourselves
-  sleep(500);
   var running = false;
 }
 
 $(document).ready(function() {
 
-// Check for click events on the navbar burger icon
-$(".navbar-burger").click(function() {
+  load_models()
 
-    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-    $(".navbar-burger").toggleClass("is-active");
-    $(".navbar-menu").toggleClass("is-active");
+  // Check for click events on the navbar burger icon
+  $(".navbar-burger").click(function() {
 
-});
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      $(".navbar-burger").toggleClass("is-active");
+      $(".navbar-menu").toggleClass("is-active");
+  });
+
 });
 
 </script>

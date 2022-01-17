@@ -2,6 +2,7 @@
 import os
 
 # Third party imports
+import tensorflow as tf
 from textgenrnn import textgenrnn
 
 def train_model_on_data(data_path: str):
@@ -14,8 +15,8 @@ def train_model_on_data(data_path: str):
 
 # Uncomment to train a new model
 # train_model_on_data(os.path.join("data", "dessert.txt"))
-# train_model_on_data(os.path.join("data", "breakfast.txt"))
-# train_model_on_data(os.path.join("data", "dinner.txt"))
+#train_model_on_data(os.path.join("data", "breakfast.txt"))
+#train_model_on_data(os.path.join("data", "dinner.txt"))
 
 def setup_models() -> textgenrnn:
     breakfast_model = textgenrnn(os.path.join("models", "breakfast.hdf5"))
@@ -26,3 +27,7 @@ def setup_models() -> textgenrnn:
 def get_recipe(model: textgenrnn) -> str:
     recipes = model.generate(1, temperature=0.4, return_as_list=True)
     return recipes[0]
+
+breakfast_model = textgenrnn(os.path.join("models", "breakfast.hdf5"))
+breakfast_model.model.config = breakfast_model.config
+tf.keras.models.save_model(breakfast_model.model, 'breakfast.h5')
