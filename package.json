@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/alexandermjones/recipe_generator#readme",
   "dependencies": {
+    "@tensorflow/tfjs": "^3.14.0",
     "express": "^4.17.2"
   }
 }
